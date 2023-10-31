@@ -1,0 +1,59 @@
+components:
+  schemas:
+    Product:
+      type: object
+      required:
+        - description
+        - price
+        - quantity
+      properties:
+        id: 
+          type: integer
+          description: Id do produto
+        description:
+          type: string
+          description: Descrição/nome do produto
+        price:
+          type: number
+          description: Preço do produto
+        quantity:
+          type: number
+          description: Quantidade do produto em estoque
+      example:
+        description: Notebook
+        price: 2223.50
+        quantity: 20
+    
+    ProductById:
+      type: object
+      properties:
+        product:
+          allOf:
+            - $ref: "#components/schemas/Product"
+            - type: object
+              required:
+                - id
+              properties:
+                id: 
+                  type: number
+                  description: O identificador do produto salvo no bando de dados
+              example:
+                id: 1
+
+    ProductsByDescription:
+      type: object
+      properties:
+        products:
+          type: array
+          items:
+            allOf:
+              - $ref: "#components/schemas/Product"
+              - type: object
+                required:
+                  - id
+                properties:
+                  id: 
+                    type: number
+                    description: O identificador do produto salvo no bando de dados
+                example:
+                  id: 1

@@ -1,0 +1,83 @@
+paths:
+  /products:
+    post:
+      summary: Salva um novo produto
+      tags: [Products]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#components/schemas/Product"
+      responses:
+        201:
+          description: Produto cadastrado com sucesso
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message: 
+                    type: string
+                    example: Product registered
+        400:
+          description: Entrada de dados inválida
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message: 
+                    type: string
+                    example: Invalid inputs
+
+
+  /products/{id}:
+    get:
+      summary: Salva um novo produto
+      tags: [Products]
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+          description: Id do produto
+      responses:
+        200:
+          description: Produto cadastrado no banco de dados
+          content:
+            application/json:
+              schema:
+                $ref: "#components/schemas/ProductById"
+        404:
+          description: Produto não encontrado
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message: 
+                    type: string
+                    example: Product not found
+  
+
+  /products/description/{description}:
+    get:
+      summary: Salva um novo produto
+      tags: [Products]
+      parameters:
+        - in: path
+          name: description
+          schema:
+            type: string
+          required: true
+          description: Descrição/nome do produto
+      responses:
+        200:
+          description: Produtos que correspondem a busca
+          content:
+            application/json:
+              schema:
+                $ref: "#components/schemas/ProductsByDescription"
+        
